@@ -19,6 +19,18 @@ const server = http.createServer((req,res) => {
     // console.log(req.url, req.method, req.headers);
     // process.exit();
 
+    //routing requests
+    const url = req.url;
+    if(url === '/'){
+        res.write('<html>');
+        res.write('<head><title>Enter message</title></head>');
+        res.write("<body><form action='/message' method='POST'><input name='message' type='text'><button type='submit'>Send</button></form></body>");
+        res.write('</html>');
+        return res.end(); //add to get out of the anonymous event listener function
+        //and to ensure the subsequent code after this is not executed
+        //turns out res.end() does not stop execution on its own
+    }
+
     //set headers in the response
     res.setHeader('Content-Type', 'text/html');
     res.write('<html>');

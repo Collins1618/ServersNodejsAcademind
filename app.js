@@ -13,7 +13,12 @@ const http = require('http');
 
 
 //request listener as an arrow function
-http.createServer((req,res) => {
-    console.log(req);
-    
+//createServer returns a server which you shoudld save in a constant
+//or variable, const preferred
+const server = http.createServer((req,res) => {
+    console.log(req.url, req.method, req.headers);
+    // process.exit();
+
 })
+
+server.listen(3000);

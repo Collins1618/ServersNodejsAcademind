@@ -1,4 +1,5 @@
 const http = require('http');
+const fs = require('fs');
 
 //Request listener function which will be an argument in the 
 //createServer() function
@@ -21,6 +22,7 @@ const server = http.createServer((req,res) => {
 
     //routing requests
     const url = req.url;
+    const method = req.method;
     if(url === '/'){
         res.write('<html>');
         res.write('<head><title>Enter message</title></head>');
@@ -29,6 +31,10 @@ const server = http.createServer((req,res) => {
         return res.end(); //add to get out of the anonymous event listener function
         //and to ensure the subsequent code after this is not executed
         //turns out res.end() does not stop execution on its own
+    }
+
+    if(url === '/message' && method === 'POST'){
+        fs.writeFile('message');
     }
 
     //set headers in the response

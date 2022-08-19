@@ -33,8 +33,17 @@ const server = http.createServer((req,res) => {
         //turns out res.end() does not stop execution on its own
     }
 
+    //redirect to / and create a new file and store the message the 
+    //user entered in it
     if(url === '/message' && method === 'POST'){
-        fs.writeFile('message');
+        //get our request data before writing to the file
+        //and before sending a response
+        //we do this by registering event listeners
+        req.on();
+        fs.writeFileSync('message.txt', 'Dummy');
+        res.statusCode = 302;
+        res.setHeader('Location', '/');
+        return res.end();
     }
 
     //set headers in the response

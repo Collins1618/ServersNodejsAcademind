@@ -38,9 +38,25 @@ const server = http.createServer((req,res) => {
     if(url === '/message' && method === 'POST'){
         //get our request data before writing to the file
         //and before sending a response
-        //we do this by registering event listeners
-        req.on();
-        fs.writeFileSync('message.txt', 'Dummy');
+        //we do this by registering event 
+        const body = []; //empty array
+        req.on('data', (chunk) => {
+            console.log(chunk)
+            body.push(chunk);
+        });
+
+        //register another event listenr, the end listener
+        //will be fired once done parsing the incoming data
+        req.on('end', () => {
+            const parsedBody = Buffer.concat(body).toString();
+            const message = parsedBody.split('=')[1];
+
+            //below code moved in the event listener to avoid
+            //having it run to early
+            fs.writeFileSync('message.txt', message);
+        });
+
+        
         res.statusCode = 302;
         res.setHeader('Location', '/');
         return res.end();

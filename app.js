@@ -47,19 +47,20 @@ const server = http.createServer((req,res) => {
 
         //register another event listenr, the end listener
         //will be fired once done parsing the incoming data
-        req.on('end', () => {
+        return req.on('end', () => {
             const parsedBody = Buffer.concat(body).toString();
             const message = parsedBody.split('=')[1];
 
             //below code moved in the event listener to avoid
             //having it run to early
-            fs.writeFileSync('message.txt', message);
+            fs.writeFile('message.txt', message);
+            res.statusCode = 302;
+            res.setHeader('Location', '/');
+            return res.end();
         });
 
         
-        res.statusCode = 302;
-        res.setHeader('Location', '/');
-        return res.end();
+        
     }
 
     //set headers in the response

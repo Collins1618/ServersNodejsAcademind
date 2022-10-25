@@ -1,0 +1,21 @@
+{
+  "name": "createserver",
+  "version": "1.0.0",
+  "description": "Creating servers in NodeJs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "start-server": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Collins1618/ServersNodejsAcademind.git"
+  },
+  "author": "Collins Kariuki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Collins1618/ServersNodejsAcademind/issues"
+  },
+  "homepage": "https://github.com/Collins1618/ServersNodejsAcademind#readme"
+}
